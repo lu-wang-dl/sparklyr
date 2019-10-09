@@ -106,7 +106,7 @@ class ArrowConvertersImpl {
     val arrowWriter = ArrowWriter.create(root)
 
     if (!context.isEmpty) {
-      context.get.addTaskCompletionListener { _ =>
+      context.get.addTaskCompletionListener[Unit] { _ =>
         root.close()
         allocator.close()
       }
@@ -169,7 +169,7 @@ class ArrowConvertersImpl {
       private var rowIter = if (payloadIter.hasNext) nextBatch() else Iterator.empty
 
       if (!context.isEmpty) {
-        context.get.addTaskCompletionListener { _ =>
+        context.get.addTaskCompletionListener[Unit] { _ =>
           closeReader()
           allocator.close()
         }

@@ -4,10 +4,7 @@ sparklyr:::livy_sources_refresh()
 
 sparklyr:::spark_compile_embedded_sources()
 
-targets <- c("1.5.2",
-             "1.6.0",
-             "2.0.0",
-             "2.3.0")
+targets <- c("2.4.0")
 
 spec <- Filter(
   function(e) e$spark_version %in% targets,
