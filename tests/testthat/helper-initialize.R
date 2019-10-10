@@ -44,23 +44,11 @@ testthat_shell_connection <- function() {
     remove(".testthat_livy_connection", envir = .GlobalEnv)
   }
 
-  spark_installed <- spark_installed_versions()
-  if (nrow(spark_installed[spark_installed$spark == version, ]) == 0) {
-    options(sparkinstall.verbose = TRUE)
-    spark_install(version)
-  }
-
-  stopifnot(nrow(spark_installed_versions()) > 0)
-
   # generate connection if none yet exists
   connected <- FALSE
   if (exists(".testthat_spark_connection", envir = .GlobalEnv)) {
     sc <- get(".testthat_spark_connection", envir = .GlobalEnv)
     connected <- connection_is_open(sc)
-  }
-
-  if (Sys.getenv("INSTALL_WINUTILS") == "true") {
-    spark_install_winutils(version)
   }
 
   if (!connected) {
