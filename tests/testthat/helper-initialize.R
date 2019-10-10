@@ -24,7 +24,7 @@ spark_install_winutils <- function(version) {
 
 testthat_spark_connection <- function() {
   if (!exists(".testthat_latest_spark", envir = .GlobalEnv))
-    assign(".testthat_latest_spark", "2.3.0", envir = .GlobalEnv)
+    assign(".testthat_latest_spark", "3.0.0", envir = .GlobalEnv)
   livy_version <- Sys.getenv("LIVY_VERSION")
   if (nchar(livy_version) > 0)
     testthat_livy_connection()
@@ -75,7 +75,7 @@ testthat_shell_connection <- function() {
     config[["sparklyr.apply.env.foo"]] <- "env-test"
 
     setwd(tempdir())
-    sc <- spark_connect(master = "local", version = version, config = config)
+    sc <- spark_connect(master = "databricks")
     assign(".testthat_spark_connection", sc, envir = .GlobalEnv)
   }
 
