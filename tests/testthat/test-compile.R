@@ -23,6 +23,7 @@ test_that("'find_scalac' can find scala version", {
 })
 
 test_that("'spark_default_compilation_spec' can create default specification", {
+  skip("Need to add scala 2.12")
   spec <- spark_default_compilation_spec(locations = scalac_download_path)
   expect_gte(length(spec), 3)
 })
