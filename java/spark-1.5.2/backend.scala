@@ -52,7 +52,7 @@ class Backend() {
 
   import org.apache.spark.SparkConf
   import org.apache.spark.SparkContext
-  import org.apache.spark.sql.hive.HiveContext
+  // import org.apache.spark.sql.hive.HiveContext
 
   import scala.util.Try
 
@@ -76,7 +76,7 @@ class Backend() {
   private[this] var batchFile: String = ""
 
   private[this] var sc: SparkContext = null
-  private[this] var hc: HiveContext = null
+  // private[this] var hc: HiveContext = null
 
   private[this] var sessionsMap: Map[Int, Int] = Map()
 

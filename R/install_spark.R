@@ -50,10 +50,15 @@ spark_install_find <- function(version = NULL,
   installedOnly <- installed_only
 
   versions <- spark_versions(latest = latest)
-  if (installedOnly)
+  if (!is.null(sparkVersion) && sparkVersion == "master") {
     versions <- versions[versions$installed, ]
-  versions <- if (is.null(sparkVersion)) versions else versions[versions$spark == sparkVersion, ]
-  versions <- if (is.null(hadoopVersion)) versions else versions[versions$hadoop == hadoopVersion, ]
+  }
+  else {
+    if (installedOnly)
+      versions <- versions[versions$installed, ]
+    versions <- if (is.null(sparkVersion)) versions else versions[versions$spark == sparkVersion, ]
+    versions <- if (is.null(hadoopVersion)) versions else versions[versions$hadoop == hadoopVersion, ]
+  }
 
   if(NROW(versions) == 0) {
     if (hint) {
@@ -66,6 +71,7 @@ spark_install_find <- function(version = NULL,
       stop("Spark version not available. Find available versions, using spark_available_versions()")
     }
   }
+
 
   versions <- versions[with(versions, order(default, spark, hadoop_default, decreasing = TRUE)), ]
   spark_install_info(as.character(versions[1,]$spark), as.character(versions[1,]$hadoop), latest = latest)

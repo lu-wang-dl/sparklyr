@@ -13,7 +13,8 @@ class ArrowBatchStreamWriter(
   import org.apache.arrow.vector.ipc.WriteChannel
 
   import org.apache.spark.sql.types._
-  import org.apache.spark.sql.execution.arrow.ArrowUtils
+  // import org.apache.spark.sql.execution.arrow.ArrowUtils
+  import org.apache.spark.sql.util.ArrowUtils
 
   val arrowSchema = ArrowUtils.toArrowSchema(schema, timeZoneId)
   val writeChannel = new WriteChannel(Channels.newChannel(out))

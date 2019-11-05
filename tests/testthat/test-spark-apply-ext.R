@@ -178,6 +178,7 @@ test_that("'spark_apply' can roundtrip Date-Time", {
 })
 
 test_that("'spark_apply' supports grouped empty results", {
+  skip_on_spark_master()
   skip_slow("takes too long to measure coverage")
   process_data <- function(DF, exclude) {
     DF <- subset(DF, select = colnames(DF)[!colnames(DF) %in% exclude])

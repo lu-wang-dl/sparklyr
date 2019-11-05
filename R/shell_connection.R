@@ -186,14 +186,15 @@ start_shell <- function(master,
     app_jar <- spark_config_value(config, c("sparklyr.connect.app.jar", "sparklyr.app.jar"), NULL)
     if (is.null(app_jar)) {
       app_jar <- spark_default_app_jar(versionSparkHome)
-      if (typeof(app_jar) != "character" || nchar(app_jar) == 0) {
-        stop("sparklyr does not support Spark version: ", versionSparkHome)
-      }
+      if (is.null(versionSparkHome) || versionSparkHome != "master") {
+        if (typeof(app_jar) != "character" || nchar(app_jar) == 0) {
+          stop("sparklyr does not support Spark version: ", versionSparkHome)
+        }
 
-      if (compareVersion(versionSparkHome, "1.6") < 0) {
-        warning("sparklyr does not support Spark version: ", versionSparkHome)
+        if (compareVersion(versionSparkHome, "1.6") < 0) {
+          warning("sparklyr does not support Spark version: ", versionSparkHome)
+        }
       }
-
       app_jar <- shQuote(normalizePath(app_jar, mustWork = FALSE), type = shQuoteType)
       shell_args <- c(shell_args, "--class", "sparklyr.Shell")
     }
@@ -235,12 +236,14 @@ start_shell <- function(master,
     spark_submit_path <- spark_submit_paths[[which(file.exists(spark_submit_paths))[[1]]]]
 
     # resolve extensions
-    spark_version <- numeric_version(
-      ifelse(is.null(spark_version),
-             spark_version_from_home(spark_home),
-             gsub("[-_a-zA-Z]", "", spark_version)
+    if (is.null(spark_version) || spark_version != "master") {
+      spark_version <- numeric_version(
+        ifelse(is.null(spark_version),
+               spark_version_from_home(spark_home),
+               gsub("[-_a-zA-Z]", "", spark_version)
+        )
       )
-    )
+    }
     extensions <- spark_dependencies_from_extensions(spark_version, extensions, config)
 
     # combine passed jars and packages with extensions

@@ -25,7 +25,8 @@ class ArrowConvertersImpl {
   import org.apache.spark.sql.{DataFrame, Dataset, Row, SQLContext}
   import org.apache.spark.sql.types._
   import org.apache.spark.sql.execution.LogicalRDD
-  import org.apache.spark.sql.execution.arrow.ArrowUtils
+  // import org.apache.spark.sql.execution.arrow.ArrowUtils
+  import org.apache.spark.sql.util.ArrowUtils
   import org.apache.spark.sql.execution.arrow.ArrowWriter
   import org.apache.spark.sql.SparkSession
   import org.apache.spark.sql.vectorized.{ArrowColumnVector, ColumnarBatch, ColumnVector}
@@ -234,7 +235,8 @@ object ArrowConverters {
   import org.apache.spark.sql.{DataFrame, Dataset, Row, SQLContext}
   import org.apache.spark.sql.types._
   import org.apache.spark.sql.execution.LogicalRDD
-  import org.apache.spark.sql.execution.arrow.ArrowUtils
+  // import org.apache.spark.sql.execution.arrow.ArrowUtils
+  import org.apache.spark.sql.util.ArrowUtils
   import org.apache.spark.sql.execution.arrow.ArrowWriter
   import org.apache.spark.sql.SparkSession
   import org.apache.spark.sql.vectorized.{ArrowColumnVector, ColumnarBatch, ColumnVector}
