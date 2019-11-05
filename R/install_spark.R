@@ -72,7 +72,6 @@ spark_install_find <- function(version = NULL,
     }
   }
 
-
   versions <- versions[with(versions, order(default, spark, hadoop_default, decreasing = TRUE)), ]
   spark_install_info(as.character(versions[1,]$spark), as.character(versions[1,]$hadoop), latest = latest)
 }

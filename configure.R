@@ -2,12 +2,11 @@
 args = commandArgs(trailingOnly=TRUE)
 
 if (length(args)==0) {
-#  targets <- c("1.5.2",
-#               "1.6.0",
-#               "2.0.0",
-#               "2.3.0",
-#               "2.4.0")
-  targets <- c("master")
+  targets <- c("1.5.2",
+               "1.6.0",
+               "2.0.0",
+               "2.3.0",
+               "2.4.0")
 } else if (length(args)==1) {
   # default output file
   targets <- c(args[1])
