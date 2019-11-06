@@ -158,8 +158,7 @@ sparklyr_jar_path <- function(spark_version) {
   } else if (exists(".test_on_spark_master", envir = .GlobalEnv)) {
     exact_jar <- "sparklyr-master-2.12.jar"
     system.file(file.path("java", exact_jar), package = "sparklyr")
-  }
-  else if (spark_version > "1.6") {
+  } else if (spark_version > "1.6") {
     # Spark is backwards compatible so we can use a new version with the latest jar
     all_versions <- sort(gsub("^sparklyr-|-[0-9]+\\.[0-9]+\\.jar$", "", all_jars), decreasing = T)
     all_versions <- all_versions[-1] # ignore sparklyr master jar

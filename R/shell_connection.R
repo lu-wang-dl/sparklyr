@@ -193,6 +193,7 @@ start_shell <- function(master,
       if (compareVersion(versionSparkHome, "1.6") < 0) {
         warning("sparklyr does not support Spark version: ", versionSparkHome)
       }
+
       app_jar <- shQuote(normalizePath(app_jar, mustWork = FALSE), type = shQuoteType)
       shell_args <- c(shell_args, "--class", "sparklyr.Shell")
     }
