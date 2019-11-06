@@ -51,7 +51,7 @@ testthat_shell_connection <- function() {
     spark_installed <- spark_installed[with(spark_installed, order(spark, decreasing = TRUE)), ]
     version <- spark_installed[1,]$spark
   }
-  if (nrow(spark_installed[spark_installed$spark == version, ]) == 0 && version != "master") {
+  if (nrow(spark_installed[spark_installed$spark == version, ]) == 0) {
     options(sparkinstall.verbose = TRUE)
     spark_install(version)
   }

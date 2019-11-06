@@ -19,7 +19,9 @@ function try_download_latest_snapshot {
 mkdir -p "${HOME}/spark"
 
 try_download_latest_snapshot
+tar -zxf "${spark_tarball}"
 
 echo "Content of directory:"
+cd "${SPARK_BUILD}"
+pwd
 ls -la
-tar -zxf "${spark_tarball}"
